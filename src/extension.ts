@@ -3,7 +3,7 @@
 import * as vscode from 'vscode';
 import { posix } from 'path';
 
-import { hex2rgb } from './colors';
+import { hex2hsl, rgb2hsl, HEX_REGEX, RGB_REGEX } from './colors';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -26,14 +26,11 @@ export function activate(context: vscode.ExtensionContext) {
 
     if (
       !vscode.window.activeTextEditor
-      || posix.extname(vscode.window.activeTextEditor.document.uri.path) !== '.js'
     ) {
-      return vscode.window.showInformationMessage('Open a JS file first');
+      return vscode.window.showInformationMessage('Open a file first');
     }
-
-    const colorRegex = /#(([0-9a-fA-F]{2}){3,4}|([0-9a-fA-F]){3,4})/g;
     
-    const replacedDoc = vscode.window.activeTextEditor?.document.getText().replaceAll(colorRegex, hex2rgb);
+    const replacedDoc = vscode.window.activeTextEditor?.document.getText().replaceAll(HEX_REGEX, hex2hsl).replaceAll(RGB_REGEX, rgb2hsl);
     const writeData = Buffer.from(replacedDoc, 'utf8');
     await vscode.workspace.fs.writeFile(vscode.window.activeTextEditor.document.uri, writeData);
   });
