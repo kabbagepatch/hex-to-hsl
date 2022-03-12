@@ -16,6 +16,9 @@ Doesn't support percentage rgb yet, coz I don't use those :)
 
 ## Release Notes
 
+### 0.0.3
+Fixed issue with nested node_modules not being ignored
+
 ### 0.0.2
 Converts all colours found in workspace src files
 

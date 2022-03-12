@@ -35,7 +35,7 @@ export function activate(context: vscode.ExtensionContext) {
       return vscode.window.showInformationMessage('No folder or workspace opened');
     }
 
-    const files = await vscode.workspace.findFiles('**/src/**/*.{ts,js,css,vue,jsx}', 'node_modules');
+    const files = await vscode.workspace.findFiles('**/src/**/*.{ts,js,css,vue,jsx}', '{node_modules,**/node_modules}');
     const filePaths = files.map(file => file.path);
 
     const outputChannel = vscode.window.createOutputChannel('hex-to-hsl');
