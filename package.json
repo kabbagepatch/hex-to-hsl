@@ -2,15 +2,20 @@
   "name": "hex-to-hsl",
   "displayName": "hex-to-hsl",
   "description": "Converts hex to hsl",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.64.0"
   },
+  "repository": {
+    "url": "https://github.com/kavisherlock/hex-to-hsl"
+  },
+  "publisher": "kavish",
   "categories": [
     "Other"
   ],
   "activationEvents": [
-        "onCommand:hex-to-hsl.replaceActive"
+    "onCommand:hex-to-hsl.replaceActive",
+    "onCommand:hex-to-hsl.replaceAllInWorkspace"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -18,6 +23,10 @@
       {
         "command": "hex-to-hsl.replaceActive",
         "title": "Convert all Colours to HSL in Active Window"
+      },
+      {
+        "command": "hex-to-hsl.replaceAllInWorkspace",
+        "title": "Convert all Colours to HSL in Workspace"
       }
     ],
     "keybindings": [{

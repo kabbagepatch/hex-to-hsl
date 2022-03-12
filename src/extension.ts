@@ -1,42 +1,68 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { posix } from 'path';
 
 import { hex2hsl, rgb2hsl, HEX_REGEX, RGB_REGEX } from './colors';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
   console.log('Congratulations, your extension "hex-to-hsl" is now active!');
 
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
-  let disposable = vscode.commands.registerCommand('hex-to-hsl.replaceActive', async () => {
-    // The code you place here will be executed every time your command is executed
-    // Display a message box to the user
+  let replaceActive = vscode.commands.registerCommand('hex-to-hsl.replaceActive', async () => {
     vscode.window.showInformationMessage('Hello from hex-to-hsl!');
     if (!vscode.workspace.workspaceFolders) {
       return vscode.window.showInformationMessage('No folder or workspace opened');
     }
 
-    if (
-      !vscode.window.activeTextEditor
-    ) {
+    if (!vscode.window.activeTextEditor) {
       return vscode.window.showInformationMessage('Open a file first');
     }
-    
+
+    const fileContent = vscode.window.activeTextEditor?.document.getText();
+
+    const hexRegex = new RegExp(HEX_REGEX);
+    const rgbRegex = new RegExp(RGB_REGEX);
+    const combinedRegex = new RegExp(hexRegex.source + "|" + rgbRegex.source);
+    if (!fileContent.match(combinedRegex)) {
+      return;
+    }
+
     const replacedDoc = vscode.window.activeTextEditor?.document.getText().replaceAll(HEX_REGEX, hex2hsl).replaceAll(RGB_REGEX, rgb2hsl);
     const writeData = Buffer.from(replacedDoc, 'utf8');
     await vscode.workspace.fs.writeFile(vscode.window.activeTextEditor.document.uri, writeData);
   });
 
-  context.subscriptions.push(disposable);
+  let replaceAllInWorkspace = vscode.commands.registerCommand('hex-to-hsl.replaceAllInWorkspace', async () => {
+    vscode.window.showInformationMessage('Hello from hex-to-hsl!');
+    if (!vscode.workspace.workspaceFolders) {
+      return vscode.window.showInformationMessage('No folder or workspace opened');
+    }
+
+    const files = await vscode.workspace.findFiles('**/src/**/*.{ts,js,css,vue,jsx}', 'node_modules');
+    const filePaths = files.map(file => file.path);
+
+    const outputChannel = vscode.window.createOutputChannel('hex-to-hsl');
+    outputChannel.show();
+    outputChannel.appendLine(`Replaced colours in the following files:`);
+
+    for (const file of filePaths) {
+      const fileUri = vscode.Uri.file(file);
+      const fileContent = (await vscode.workspace.fs.readFile(fileUri)).toString();
+
+      const hexRegex = new RegExp(HEX_REGEX);
+      const rgbRegex = new RegExp(RGB_REGEX);
+      const combinedRegex = new RegExp(hexRegex.source + "|" + rgbRegex.source);
+      if (!fileContent.match(combinedRegex)) {
+        continue;
+      }
+
+      outputChannel.appendLine(file);
+
+      const replacedDoc = fileContent.replaceAll(HEX_REGEX, hex2hsl).replaceAll(RGB_REGEX, rgb2hsl);
+      const writeData = Buffer.from(replacedDoc, 'utf8');
+      await vscode.workspace.fs.writeFile(fileUri, writeData);
+    }
+  });
+
+  context.subscriptions.push(replaceActive);
+  context.subscriptions.push(replaceAllInWorkspace);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
