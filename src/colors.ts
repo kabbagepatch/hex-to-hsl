@@ -76,7 +76,7 @@ export const hslToHex = (color : string) : string => {
   const h = parseInt(colorMatches[1]);
   const s = parseInt(colorMatches[2]);
   let l = parseInt(colorMatches[3]);
-  const a = parseInt(colorMatches[4]);
+  const a = colorMatches[4] ? parseInt(colorMatches[4]) : null;
 
   l /= 100;
   const x = s * Math.min(l, 1 - l) / 100;
@@ -85,5 +85,5 @@ export const hslToHex = (color : string) : string => {
     const color = l - x * Math.max(Math.min(k - 3, 9 - k, 1), -1);
     return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
   };
-  return `#${f(0)}${f(8)}${f(4)}${a.toString(16)}`;
+  return `#${f(0)}${f(8)}${f(4)}${a ? a.toString(16) : ''}`;
 };

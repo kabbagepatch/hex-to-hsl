@@ -22,9 +22,9 @@ export function activate(context: vscode.ExtensionContext) {
       return;
     }
 
-    const replacedDoc = vscode.window.activeTextEditor?.document.getText();
+    let replacedDoc = vscode.window.activeTextEditor?.document.getText();
     replaceMaps.forEach(replaceMap => {
-      replacedDoc.replaceAll(replaceMap.regex, replaceMap.replaceFunction);
+      replacedDoc = replacedDoc.replaceAll(replaceMap.regex, replaceMap.replaceFunction);
     });
 
     const writeData = Buffer.from(replacedDoc, 'utf8');
@@ -54,7 +54,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     for (const file of filePaths) {
       const fileUri = vscode.Uri.file(file);
-      const fileContent = (await vscode.workspace.fs.readFile(fileUri)).toString();
+      let fileContent = (await vscode.workspace.fs.readFile(fileUri)).toString();
 
       const combinedRegex = new RegExp(replaceMaps.map(replaceMap => replaceMap.regex.source).join('|'));
       if (!fileContent.match(combinedRegex)) {
@@ -64,7 +64,7 @@ export function activate(context: vscode.ExtensionContext) {
       outputChannel.appendLine(file);
 
       replaceMaps.forEach(replaceMap => {
-        fileContent.replaceAll(replaceMap.regex, replaceMap.replaceFunction);
+        fileContent = fileContent.replaceAll(replaceMap.regex, replaceMap.replaceFunction);
       });
       const writeData = Buffer.from(fileContent, 'utf8');
       await vscode.workspace.fs.writeFile(fileUri, writeData);
@@ -75,8 +75,8 @@ export function activate(context: vscode.ExtensionContext) {
     await replaceInWorkspace([{ regex: HEX_REGEX, replaceFunction: hex2hsl }, { regex: RGB_REGEX, replaceFunction: rgb2hsl }]);
   });
 
-  const hsl2hexWorkspace = vscode.commands.registerCommand('hex-to-hsl.hex2hslWorkspace', async () => {
-    await replaceInWorkspace([{ regex: RGB_REGEX, replaceFunction: rgb2hsl }, { regex: HEX_REGEX, replaceFunction: hex2hsl }]);
+  const hsl2hexWorkspace = vscode.commands.registerCommand('hex-to-hsl.hsl2hexWorkspace', async () => {
+    await replaceInWorkspace([{ regex: RGB_REGEX, replaceFunction: rgb2hsl }, { regex: HSL_REGEX, replaceFunction: hslToHex }]);
   });
 
   context.subscriptions.push(hex2hslActive);
