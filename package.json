@@ -2,7 +2,7 @@
   "name": "hex-to-hsl",
   "displayName": "hex-to-hsl",
   "description": "Converts hex to hsl",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.64.0"
   },
