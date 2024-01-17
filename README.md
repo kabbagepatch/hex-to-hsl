@@ -17,6 +17,9 @@ Or use the VS Code commands to convert the entire workspace's files' colours to 
 
 ## Release Notes
 
+### 0.1.1
+Handle no commas in hsl values (example: `hsl(292 5% 99%)`)
+
 ### 0.1.0
 Added ability to convert to all colours in active file and workspace to hex
 
