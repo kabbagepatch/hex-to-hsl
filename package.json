@@ -2,7 +2,7 @@
   "name": "hex-to-hsl",
   "displayName": "hex-to-hsl",
   "description": "Converts hex to hsl",
-  "version": "0.0.3",
+  "version": "0.1.1",
   "engines": {
     "vscode": "^1.64.0"
   },
@@ -14,27 +14,45 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:hex-to-hsl.replaceActive",
-    "onCommand:hex-to-hsl.replaceAllInWorkspace"
+    "onCommand:hex-to-hsl.hex2hslActive",
+    "onCommand:hex-to-hsl.hex2hslWorkspace",
+    "onCommand:hex-to-hsl.hsl2hexActive",
+    "onCommand:hex-to-hsl.hsl2hexWorkspace"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "hex-to-hsl.replaceActive",
+        "command": "hex-to-hsl.hex2hslActive",
         "title": "Convert all Colours to HSL in Active Window"
       },
       {
-        "command": "hex-to-hsl.replaceAllInWorkspace",
+        "command": "hex-to-hsl.hex2hslWorkspace",
         "title": "Convert all Colours to HSL in Workspace"
+      },
+      {
+        "command": "hex-to-hsl.hsl2hexActive",
+        "title": "Convert all Colours to Hex in Active Window"
+      },
+      {
+        "command": "hex-to-hsl.hsl2hexWorkspace",
+        "title": "Convert all Colours to Hex in Workspace"
       }
     ],
-    "keybindings": [{
-      "command": "hex-to-hsl.replaceActive",
-      "key": "ctrl+h ctrl+s",
-      "mac": "cmd+h cmd+s",
-      "when": "editorTextFocus"
-    }]
+    "keybindings": [
+      {
+        "command": "hex-to-hsl.hex2hslActive",
+        "key": "ctrl+h ctrl+s",
+        "mac": "cmd+h cmd+s",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "hex-to-hsl.hsl2hexActive",
+        "key": "ctrl+h ctrl+x",
+        "mac": "cmd+h cmd+x",
+        "when": "editorTextFocus"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

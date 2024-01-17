@@ -1,5 +1,6 @@
 export const HEX_REGEX = /#(([0-9a-fA-F]{2}){3,4}|([0-9a-fA-F]){3,4})/g;
 export const RGB_REGEX = /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/g;
+export const HSL_REGEX = /hsla?\((\d+),?\s*(\d+)\s*%,?\s*(\d+)\s*%(?:,?\s*(\d+(?:\.\d+)?))?\)/g;
 
 export const hex2rgb = (color : string) : string => {
   if (color.length < 7) {
@@ -62,4 +63,27 @@ export const rgb2hsl = (color : string) : string => {
 
 export const hex2hsl = (color : string) : string => {
   return rgb2hsl(hex2rgb(color));
+};
+
+export const hslToHex = (color : string) : string => {
+  const hslRegex = new RegExp(HSL_REGEX);
+  const colorMatches = hslRegex.exec(color);
+  if (colorMatches === null) {
+    console.log('null matches');
+    return color;
+  }
+
+  const h = parseInt(colorMatches[1]);
+  const s = parseInt(colorMatches[2]);
+  let l = parseInt(colorMatches[3]);
+  const a = colorMatches[4] ? parseInt(colorMatches[4]) : null;
+
+  l /= 100;
+  const x = s * Math.min(l, 1 - l) / 100;
+  const f = (n : number) => {
+    const k = (n + h / 30) % 12;
+    const color = l - x * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
+  };
+  return `#${f(0)}${f(8)}${f(4)}${a ? a.toString(16) : ''}`;
 };
