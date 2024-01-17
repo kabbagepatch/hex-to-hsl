@@ -41,7 +41,7 @@
         "when": "editorTextFocus"
       },
       {
-        "command": "hex-to-hsl.hex2hslActive",
+        "command": "hex-to-hsl.hsl2hexActive",
         "key": "ctrl+h ctrl+x",
         "mac": "cmd+h cmd+x",
         "when": "editorTextFocus"
