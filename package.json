@@ -13,6 +13,12 @@
   "categories": [
     "Other"
   ],
+  "activationEvents": [
+    "onCommand:hex-to-hsl.hex2hslActive",
+    "onCommand:hex-to-hsl.hex2hslWorkspace",
+    "onCommand:hex-to-hsl.hsl2hexActive",
+    "onCommand:hex-to-hsl.hsl2hexWorkspace"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
