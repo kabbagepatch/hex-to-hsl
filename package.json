@@ -1,53 +1,73 @@
 {
   "name": "hex-to-hsl",
   "displayName": "hex-to-hsl",
-  "description": "Converts hex to hsl",
-  "version": "0.1.1",
+  "description": "Converts hex to hsl, and other format conversions",
+  "version": "0.2.0",
   "engines": {
     "vscode": "^1.64.0"
   },
   "repository": {
-    "url": "https://github.com/kavisherlock/hex-to-hsl"
+    "url": "https://github.com/kabbagepatch/hex-to-hsl"
   },
   "publisher": "kavish",
   "categories": [
     "Other"
   ],
   "activationEvents": [
-    "onCommand:hex-to-hsl.hex2hslActive",
-    "onCommand:hex-to-hsl.hex2hslWorkspace",
-    "onCommand:hex-to-hsl.hsl2hexActive",
-    "onCommand:hex-to-hsl.hsl2hexWorkspace"
+    "onCommand:hex-to-hsl.all-to-hslActive",
+    "onCommand:hex-to-hsl.all-to-hslWorkspace",
+    "onCommand:hex-to-hsl.hex-to-hslActive",
+    "onCommand:hex-to-hsl.hex-to-hslWorkspace",
+    "onCommand:hex-to-hsl.rgb-to-hslActive",
+    "onCommand:hex-to-hsl.rgb-to-hslWorkspace",
+    "onCommand:hex-to-hsl.hsl-to-hexActive",
+    "onCommand:hex-to-hsl.hsl-to-hexWorkspace"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "hex-to-hsl.hex2hslActive",
+        "command": "hex-to-hsl.all-to-hslActive",
         "title": "Convert all Colours to HSL in Active Window"
       },
       {
-        "command": "hex-to-hsl.hex2hslWorkspace",
+        "command": "hex-to-hsl.all-to-hslWorkspace",
         "title": "Convert all Colours to HSL in Workspace"
       },
       {
-        "command": "hex-to-hsl.hsl2hexActive",
+        "command": "hex-to-hsl.hex-to-hslActive",
+        "title": "Convert all hex Colours to HSL in Active Window"
+      },
+      {
+        "command": "hex-to-hsl.hex-to-hslWorkspace",
+        "title": "Convert all hex Colours to HSL in Workspace"
+      },
+      {
+        "command": "hex-to-hsl.rgb-to-hslActive",
+        "title": "Convert all RGB Colours to HSL in Active Window"
+      },
+      {
+        "command": "hex-to-hsl.rgb-to-hslWorkspace",
+        "title": "Convert all RGB Colours to HSL in Workspace"
+      },
+      {
+        "command": "hex-to-hsl.hsl-to-hexActive",
         "title": "Convert all Colours to Hex in Active Window"
       },
       {
-        "command": "hex-to-hsl.hsl2hexWorkspace",
+        "command": "hex-to-hsl.hsl-to-hexWorkspace",
         "title": "Convert all Colours to Hex in Workspace"
       }
     ],
     "keybindings": [
       {
-        "command": "hex-to-hsl.hex2hslActive",
+        "command": "hex-to-hsl.all-to-hslActive",
         "key": "ctrl+h ctrl+s",
         "mac": "cmd+h cmd+s",
         "when": "editorTextFocus"
       },
       {
-        "command": "hex-to-hsl.hsl2hexActive",
+        "command": "hex-to-hsl.hsl-to-hexActive",
         "key": "ctrl+h ctrl+x",
         "mac": "cmd+h cmd+x",
         "when": "editorTextFocus"

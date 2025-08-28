@@ -31,12 +31,20 @@ export function activate(context: vscode.ExtensionContext) {
     await vscode.workspace.fs.writeFile(vscode.window.activeTextEditor.document.uri, writeData);
   };
 
-  const hex2hslActive = vscode.commands.registerCommand('hex-to-hsl.hex2hslActive', async () => {
+  const all2hslActive = vscode.commands.registerCommand('hex-to-hsl.all-to-hslActive', async () => {
     await replaceInActiveWindow([{ regex: HEX_REGEX, replaceFunction: hex2hsl }, { regex: RGB_REGEX, replaceFunction: rgb2hsl }]);
   });
 
-  const hsl2hexActive = vscode.commands.registerCommand('hex-to-hsl.hsl2hexActive', async () => {
-    await replaceInActiveWindow([{ regex: RGB_REGEX, replaceFunction: rgb2hsl }, { regex: HSL_REGEX, replaceFunction: hslToHex }]);
+  const hex2hslActive = vscode.commands.registerCommand('hex-to-hsl.hex-to-hslActive', async () => {
+    await replaceInActiveWindow([{ regex: HEX_REGEX, replaceFunction: hex2hsl }]);
+  });
+
+  const rgb2hslActive = vscode.commands.registerCommand('hex-to-hsl.rgb-to-hslActive', async () => {
+    await replaceInActiveWindow([{ regex: RGB_REGEX, replaceFunction: rgb2hsl }]);
+  });
+
+  const hsl2hexActive = vscode.commands.registerCommand('hex-to-hsl.hsl-to-hexActive', async () => {
+    await replaceInActiveWindow([{ regex: HSL_REGEX, replaceFunction: hslToHex }]);
   });
 
   const replaceInWorkspace = async (replaceMaps : { regex : RegExp, replaceFunction : any }[]) => {
@@ -71,17 +79,29 @@ export function activate(context: vscode.ExtensionContext) {
     }
   };
 
-  const hex2hslWorkspace = vscode.commands.registerCommand('hex-to-hsl.hex2hslWorkspace', async () => {
+  const all2hslWorkspace = vscode.commands.registerCommand('hex-to-hsl.all-to-hslWorkspace', async () => {
     await replaceInWorkspace([{ regex: HEX_REGEX, replaceFunction: hex2hsl }, { regex: RGB_REGEX, replaceFunction: rgb2hsl }]);
   });
 
-  const hsl2hexWorkspace = vscode.commands.registerCommand('hex-to-hsl.hsl2hexWorkspace', async () => {
-    await replaceInWorkspace([{ regex: RGB_REGEX, replaceFunction: rgb2hsl }, { regex: HSL_REGEX, replaceFunction: hslToHex }]);
+  const hex2hslWorkspace = vscode.commands.registerCommand('hex-to-hsl.hex-to-hslWorkspace', async () => {
+    await replaceInWorkspace([{ regex: HEX_REGEX, replaceFunction: hex2hsl }]);
   });
 
+  const rgb2hslWorkspace = vscode.commands.registerCommand('hex-to-hsl.rgb-to-hslWorkspace', async () => {
+    await replaceInWorkspace([{ regex: RGB_REGEX, replaceFunction: rgb2hsl }]);
+  });
+
+  const hsl2hexWorkspace = vscode.commands.registerCommand('hex-to-hsl.hsl-to-hexWorkspace', async () => {
+    await replaceInWorkspace([{ regex: HSL_REGEX, replaceFunction: hslToHex }]);
+  });
+
+  context.subscriptions.push(all2hslActive);
   context.subscriptions.push(hex2hslActive);
+  context.subscriptions.push(rgb2hslActive);
   context.subscriptions.push(hsl2hexActive);
+  context.subscriptions.push(all2hslWorkspace);
   context.subscriptions.push(hex2hslWorkspace);
+  context.subscriptions.push(rgb2hslWorkspace);
   context.subscriptions.push(hsl2hexWorkspace);
 }
 

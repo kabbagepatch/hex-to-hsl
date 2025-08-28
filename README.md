@@ -4,11 +4,11 @@ A simple extension that converts any hex and rgb colours in your files to the hs
 
 ## Features
 
-Use keyboard shortcut ctrl+h ctrl+s for windows and cmd+h cmd+s for mac to convert the currently active file to hsl
+Use keyboard shortcut ctrl+h ctrl+s for windows and cmd+h cmd+s for mac to convert the colors in the currently active file to hsl
 
-Conversely, use keyboard shortcut ctrl+h ctrl+x for windows and cmd+h cmd+x for mac to convert the currently active file to hex
+Conversely, use keyboard shortcut ctrl+h ctrl+x for windows and cmd+h cmd+x for mac to convert the hsl colors the currently active file to hex
 
-Or use the VS Code commands to convert the entire workspace's files' colours to hsl or hex. Currently converts all files in the src folder with the following extensions: .ts, .js, .css, .vue, .jsx
+Or use the various VS Code commands to convert the entire workspace's files' colours to hsl or hex. Currently converts all files in the src folder with the following extensions: .ts, .js, .css, .vue, .jsx
 
 ## Known Issues
 
@@ -16,6 +16,10 @@ Or use the VS Code commands to convert the entire workspace's files' colours to 
 - Has small issues with floating points in hsl and rgb formats, since it parses them as ints
 
 ## Release Notes
+
+### 0.2.0
+Added new commands to convert only hex or only rgb to hsl (along with the command to convert all)
+Fixed issue where non-colors were converted as hex
 
 ### 0.1.1
 Handle no commas in hsl values (example: `hsl(292 5% 99%)`)
