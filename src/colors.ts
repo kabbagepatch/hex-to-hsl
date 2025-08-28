@@ -1,4 +1,4 @@
-export const HEX_REGEX = /#(([0-9a-fA-F]{2}){3,4}|([0-9a-fA-F]){3,4})/g;
+export const HEX_REGEX = /#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\b/g;
 export const RGB_REGEX = /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/g;
 export const HSL_REGEX = /hsla?\((\d+),?\s*(\d+)\s*%,?\s*(\d+)\s*%(?:,?\s*(\d+(?:\.\d+)?))?\)/g;
 
