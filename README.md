@@ -17,6 +17,9 @@ Or use the various VS Code commands to convert the entire workspace's files' col
 
 ## Release Notes
 
+### 0.2.1
+Fixed bug so folder doesn't need to be open for active file to be modified
+
 ### 0.2.0
 Added new commands to convert only hex or only rgb to hsl (along with the command to convert all)
 Fixed issue where non-colors were converted as hex

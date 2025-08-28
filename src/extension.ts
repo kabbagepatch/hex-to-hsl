@@ -7,10 +7,6 @@ export function activate(context: vscode.ExtensionContext) {
 
   const replaceInActiveWindow = async (replaceMaps : { regex : RegExp, replaceFunction : any }[]) => {
     vscode.window.showInformationMessage('Hello from hex-to-hsl!');
-    if (!vscode.workspace.workspaceFolders) {
-      return vscode.window.showInformationMessage('No folder or workspace opened');
-    }
-
     if (!vscode.window.activeTextEditor) {
       return vscode.window.showInformationMessage('Open a file first');
     }
