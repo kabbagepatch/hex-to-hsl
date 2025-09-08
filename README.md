@@ -10,6 +10,8 @@ Conversely, use keyboard shortcut ctrl+h ctrl+x for windows and cmd+h cmd+x for 
 
 Or use the various VS Code commands to convert the entire workspace's files' colours to hsl or hex. Currently converts all files in the src folder with the following extensions: .ts, .js, .css, .vue, .jsx
 
+![Hex-to-HSL](https://github.com/user-attachments/assets/6075a91d-3e89-414a-abd2-212e2e9cf07b)
+
 ## Known Issues
 
 - Doesn't support percentage rgb yet, coz I don't use those :)
